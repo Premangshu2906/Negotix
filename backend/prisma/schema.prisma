@@ -16,6 +16,8 @@ model User {
   role             String   @default("BUYER") // BUYER, SELLER, ADMIN
   subscriptionTier String   @default("FREE")  // FREE, PRO, PREMIUM
   reputationScore  Int      @default(0)
+  isVerified       Boolean  @default(false)
+  verificationCode String?
   
   // Seller Payment Profile
   bankAccount      String?
