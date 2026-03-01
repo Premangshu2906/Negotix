@@ -39,20 +39,30 @@ const upload = multer({
 });
 
 // Upload endpoint (supports multiple files)
-router.post('/', authenticate, upload.array('images', 5), (req: AuthRequest, res: Response): any => {
-    try {
-        if (!req.files || (req.files as Express.Multer.File[]).length === 0) {
-            return res.status(400).json({ error: 'No files uploaded' });
+router.post('/', authenticate, (req: AuthRequest, res: Response): any => {
+    upload.array('images', 5)(req, res, (err) => {
+        if (err instanceof multer.MulterError) {
+            // A Multer error occurred when uploading.
+            return res.status(500).json({ error: `Multer error: ${err.message}` });
+        } else if (err) {
+            // An unknown error occurred when uploading.
+            return res.status(500).json({ error: `Upload error: ${err.message}` });
         }
 
-        // Return the accessible URLs for the uploaded files
-        const files = req.files as Express.Multer.File[];
-        const imageUrls = files.map(file => `/uploads/${file.filename}`);
+        try {
+            if (!req.files || (req.files as Express.Multer.File[]).length === 0) {
+                return res.status(400).json({ error: 'No files uploaded' });
+            }
 
-        res.status(201).json({ urls: imageUrls });
-    } catch (error: any) {
-        res.status(500).json({ error: error.message || 'Server error uploading files' });
-    }
+            // Return the accessible URLs for the uploaded files
+            const files = req.files as Express.Multer.File[];
+            const imageUrls = files.map(file => `/uploads/${file.filename}`);
+
+            res.status(201).json({ urls: imageUrls });
+        } catch (error: any) {
+            res.status(500).json({ error: error.message || 'Server error uploading files' });
+        }
+    });
 });
 
 export default router;
