@@ -37,17 +37,7 @@ export default function LoginPage() {
     if (isSuccess) {
         return (
             <div className="flex min-h-screen items-center justify-center bg-black">
-                <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{
-                        repeat: Infinity,
-                        duration: 1,
-                        ease: "linear"
-                    }}
-                    className="w-32 h-32 md:w-48 md:h-48"
-                >
-                    <img src="/images/logo.png" alt="Loading" className="object-contain w-full h-full drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
-                </motion.div>
+                <div className="h-10 w-10 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" />
             </div>
         );
     }
