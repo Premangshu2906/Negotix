@@ -54,13 +54,13 @@ export default function Home() {
       <div className="mb-12 flex flex-col items-center justify-between gap-6 md:flex-row md:items-end">
         <div>
           <h1 className="text-4xl font-black tracking-tight text-white mb-2">
-            PREMIUM <span className="text-blue-500">DROPS</span>
+            YOUR ALL IN <span className="text-blue-500">ONE PLACE</span>
           </h1>
           <p className="text-gray-400">Discover exclusive items and make your best offer.</p>
         </div>
 
         <div className="flex flex-wrap gap-2">
-          {['ALL', 'ELECTRONICS', 'CLOTHING', 'HOME', 'TOYS', 'OTHER'].map(cat => (
+          {['ALL', 'FERTILIZERS', 'SEEDS', 'ORGANIC SUBSTANCES'].map(cat => (
             <button
               key={cat}
               onClick={() => setCategory(cat)}
@@ -77,12 +77,18 @@ export default function Home() {
 
       {loading ? (
         <div className="flex h-64 items-center justify-center">
-          <div className="h-8 w-8 animate-spin rounded-full border-2 border-blue-500 border-t-transparent" />
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+            className="w-16 h-16"
+          >
+            <img src="/images/logo.png" alt="Loading" className="object-contain w-full h-full drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
+          </motion.div>
         </div>
       ) : products.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 text-center border border-white/10 rounded-3xl bg-gray-900/20 backdrop-blur-sm">
           <p className="text-2xl font-bold text-gray-500 mb-2">No items available right now.</p>
-          <p className="text-gray-600">Check back soon for new premium drops.</p>
+          <p className="text-gray-600">Check back soon for new your all in one place.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">

@@ -16,6 +16,7 @@ export default function RegisterPage() {
     const [otp, setOtp] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
 
     const router = useRouter();
     const { login } = useStore();
@@ -43,13 +44,33 @@ export default function RegisterPage() {
         try {
             const res = await api.post('/auth/register', { name, email, password, role, otp });
             login(res.data.user, res.data.token);
-            router.push('/');
+            setIsSuccess(true);
+            setTimeout(() => {
+                router.push('/dashboard');
+            }, 2000);
         } catch (err: any) {
             setError(err.response?.data?.error || 'Failed to verify and register');
-        } finally {
             setIsLoading(false);
         }
     };
+
+    if (isSuccess) {
+        return (
+            <div className="flex min-h-screen items-center justify-center bg-black">
+                <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{
+                        repeat: Infinity,
+                        duration: 1,
+                        ease: "linear"
+                    }}
+                    className="w-32 h-32 md:w-48 md:h-48"
+                >
+                    <img src="/images/logo.png" alt="Loading" className="object-contain w-full h-full drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
+                </motion.div>
+            </div>
+        );
+    }
 
     return (
         <div className="flex min-h-screen items-center justify-center bg-black px-4 py-12 text-white">

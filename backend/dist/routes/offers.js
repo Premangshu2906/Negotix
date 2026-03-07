@@ -10,16 +10,19 @@ const index_1 = require("../index");
 const router = express_1.default.Router();
 // Helper to determine AI response
 const processSmartOffer = (offerAmount, acceptFloor, counterFloor) => {
+    // If the offer is above the strict accept floor, we naturally accept
     if (offerAmount >= acceptFloor) {
         return { status: 'ACCEPTED' };
     }
-    else if (offerAmount <= counterFloor) {
+    // If the offer is strictly below the counter floor limit, reject entirely
+    else if (offerAmount < counterFloor) {
         return { status: 'REJECTED' };
     }
+    // If the offer is anywhere between or equal to the counter floor, ACCEPT IT directly.
+    // The seller specified the counterFloor as their absolute minimum, so any valid offer
+    // above it should be taken instead of arbitrarily increasing the price.
     else {
-        // Basic AI counter logic: halfway between their offer and our accept floor
-        const counterAmount = parseFloat(((offerAmount + acceptFloor) / 2).toFixed(2));
-        return { status: 'AUTO_COUNTERED', counterAmount };
+        return { status: 'ACCEPTED' };
     }
 };
 // Create Offer (Buyer only)
@@ -30,6 +33,39 @@ router.post('/', auth_1.authenticate, async (req, res) => {
         }
         const { productId, offerAmount } = req.body;
         const buyerId = req.user.userId;
+        const user = await db_1.prisma.user.findUnique({ where: { id: buyerId } });
+        if (!user)
+            return res.status(404).json({ error: 'User not found' });
+        const tier = user.subscriptionTier;
+        const now = new Date();
+        const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+        // Calculate used limits
+        const [offersThisProduct, offersThisMonth] = await Promise.all([
+            db_1.prisma.offer.count({ where: { buyerId, productId } }),
+            db_1.prisma.offer.count({ where: { buyerId, createdAt: { gte: firstDayOfMonth } } })
+        ]);
+        if (tier === 'FREE') {
+            if (offersThisProduct >= 3) {
+                return res.status(403).json({ error: 'Free tier is limited to 3 negotiations per product. Upgrade to Pro!' });
+            }
+            if (offersThisMonth >= 25) {
+                return res.status(403).json({ error: 'Free tier is limited to 25 negotiations per month. Upgrade to Pro!' });
+            }
+        }
+        else if (tier === 'PRO') {
+            if (offersThisProduct >= 5) {
+                return res.status(403).json({ error: 'Pro tier is limited to 5 negotiations per product. Switch to Premium for 10!' });
+            }
+            if (offersThisMonth >= 50) {
+                return res.status(403).json({ error: 'Pro tier is limited to 50 negotiations per month. Switch to Premium for Unlimited!' });
+            }
+        }
+        else if (tier === 'PREMIUM') {
+            if (offersThisProduct >= 10) {
+                return res.status(403).json({ error: 'Premium tier allows a maximum of 10 negotiations per product.' });
+            }
+            // Premium has unlimited negotiations per month
+        }
         const product = await db_1.prisma.product.findUnique({ where: { id: productId } });
         if (!product)
             return res.status(404).json({ error: 'Product not found' });
