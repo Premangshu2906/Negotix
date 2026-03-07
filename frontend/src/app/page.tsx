@@ -64,9 +64,31 @@ export default function Home() {
           {/* LEFT SIDE: Text and Categories */}
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left pt-8">
             <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-8">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-gray-300">NEGOTIATE. </span>
+              <motion.span
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0, duration: 0.5 }}
+                className="text-white inline-block mr-3 mb-2 lg:mb-0"
+              >
+                NEGOTIATE.
+              </motion.span>
               <br className="hidden lg:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">BUY. SAVE.</span>
+              <motion.span
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+                className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 inline-block mr-3 mb-2 lg:mb-0"
+              >
+                BUY.
+              </motion.span>
+              <motion.span
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.0, duration: 0.5 }}
+                className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 inline-block"
+              >
+                SAVE.
+              </motion.span>
             </h1>
 
             <div className="flex flex-wrap lg:flex-nowrap justify-center lg:justify-start gap-4 w-[110%] md:w-full pb-6 lg:pb-2">
@@ -74,10 +96,9 @@ export default function Home() {
                 <button
                   key={cat}
                   onClick={() => setCategory(cat)}
-                  style={{ borderRadius: '50%' }}
-                  className={`px-5 py-2.5 text-xs md:text-sm font-bold tracking-wider transition-all duration-300 border-2 ${category === cat
-                    ? 'border-blue-500 bg-blue-600/20 text-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.5)] scale-105'
-                    : 'border-white/10 bg-black/50 text-gray-400 hover:border-blue-400/50 hover:text-white hover:shadow-[0_0_15px_rgba(59,130,246,0.2)] backdrop-blur-sm'
+                  className={`px-6 py-2.5 text-xs md:text-sm font-bold tracking-wider transition-all duration-300 rounded-xl bg-white/5 backdrop-blur-sm border-b-2 border-transparent ${category === cat
+                    ? 'border-blue-500 text-white shadow-[0_4px_20px_rgba(59,130,246,0.4)]'
+                    : 'text-gray-400 hover:text-white hover:border-blue-500/50 hover:shadow-[0_4px_15px_rgba(59,130,246,0.2)]'
                     }`}
                 >
                   {cat}
@@ -86,48 +107,52 @@ export default function Home() {
             </div>
           </div>
 
-          {/* RIGHT SIDE: Animated Mock Chat Window */}
-          <div className="relative w-full max-w-md mx-auto lg:ml-auto">
-            <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-white/0 p-6 backdrop-blur-xl shadow-2xl relative overflow-hidden transition-all duration-500 hover:border-white/20 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)]">
-              {/* Chat header */}
-              <div className="flex items-center space-x-3 mb-6 border-b border-white/5 pb-4">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-purple-600 flex items-center justify-center font-black text-white shadow-lg">AI</div>
-                <div>
-                  <h3 className="text-sm font-bold text-white">Negotix AI</h3>
-                  <p className="text-xs text-green-400 font-medium flex items-center"><span className="w-1.5 h-1.5 rounded-full bg-green-400 mr-1.5 animate-pulse"></span> Analyzing Deals</p>
-                </div>
-              </div>
+          {/* RIGHT SIDE: Animated Data Visualization */}
+          <div className="relative w-full max-w-md mx-auto lg:ml-auto h-64 flex items-center justify-center">
+            <svg
+              viewBox="0 0 400 200"
+              className="w-full h-full drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]"
+              preserveAspectRatio="none"
+            >
+              {/* Neon Line Graph tracking downwards */}
+              <motion.path
+                d="M 20 60 Q 80 40, 140 100 T 260 140 T 360 170"
+                fill="none"
+                stroke="url(#neonGradient)"
+                strokeWidth="4"
+                strokeLinecap="round"
+                initial={{ pathLength: 0, opacity: 0 }}
+                animate={{ pathLength: 1, opacity: 1 }}
+                transition={{ duration: 2, ease: "easeInOut" }}
+              />
 
-              {/* Chat bubbles */}
-              <div className="space-y-5">
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5, duration: 0.5 }}
-                  className="flex justify-end"
-                >
-                  <div className="bg-white/10 border border-white/10 text-white text-sm py-3 px-5 rounded-2xl rounded-tr-sm max-w-[85%] shadow-lg backdrop-blur-sm">
-                    Can you do <span className="font-bold text-blue-300">$150</span>?
-                  </div>
-                </motion.div>
+              {/* Glowing endpoint dot */}
+              <motion.circle
+                cx="360"
+                cy="170"
+                r="6"
+                fill="#3B82F6"
+                className="drop-shadow-[0_0_15px_rgba(59,130,246,1)]"
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: [1, 1.5, 1], opacity: [0.8, 1, 0.8] }}
+                transition={{
+                  delay: 2,
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
 
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 2, duration: 0.5 }}
-                  className="flex justify-start"
-                >
-                  <div className="bg-gradient-to-r from-blue-900/40 to-purple-900/40 border border-blue-500/30 text-blue-50 text-sm py-3 px-5 rounded-2xl rounded-tl-sm max-w-[90%] shadow-lg relative overflow-hidden group">
-                    <div className="absolute inset-0 -translate-x-full w-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-light-sweep" style={{ animationDelay: '3s' }} />
-                    I can drop it to <span className="font-bold text-white">$165</span> with free shipping. Deal?
-                  </div>
-                </motion.div>
-              </div>
-            </div>
+              <defs>
+                <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.1" />
+                  <stop offset="100%" stopColor="#3B82F6" stopOpacity="1" />
+                </linearGradient>
+              </defs>
+            </svg>
 
-            {/* Decorative elements behind the chat */}
-            <div className="absolute -top-6 -right-6 w-32 h-32 bg-blue-500/20 rounded-full blur-[40px] -z-10 animate-orb-shift" />
-            <div className="absolute -bottom-10 -left-6 w-40 h-40 bg-purple-500/20 rounded-full blur-[50px] -z-10 animate-orb-shift" style={{ animationDelay: '2s' }} />
+            {/* Decorative elements behind the graph */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-32 bg-blue-500/10 rounded-full blur-[50px] -z-10 animate-orb-shift" />
           </div>
         </div>
 
