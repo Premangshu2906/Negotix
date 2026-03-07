@@ -58,15 +58,14 @@ export default function Home() {
 
       <div className="relative mx-auto max-w-7xl px-8 py-12 z-10">
         <div className="mb-12 flex flex-col items-center justify-between gap-8 md:flex-row md:items-end">
-          <div className="text-center md:text-left">
-            <h1 className="text-5xl md:text-6xl font-black tracking-tight mb-4">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-gray-300">YOUR ALL IN </span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">ONE PLACE</span>
+          <div className="text-center md:text-left w-full md:w-auto flex-shrink-0">
+            <h1 className="text-4xl md:text-6xl font-black tracking-tight mb-4 whitespace-nowrap">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-gray-300">NEGOTIATE. </span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">BUY. SAVE.</span>
             </h1>
-            <p className="text-gray-300 text-lg max-w-xl">Discover exclusive items, negotiate directly with AI, and make your best offer in seconds.</p>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-nowrap justify-start md:justify-center gap-4 overflow-x-auto w-full pb-4 scrollbar-hide">
             {['ALL', 'ELECTRONICS', 'TOYS', 'DECOR', 'OTHERS'].map(cat => (
               <button
                 key={cat}
