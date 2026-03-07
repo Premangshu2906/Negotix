@@ -158,7 +158,7 @@ export default function Home() {
                 animate={{ opacity: 0.9 }}
                 transition={{ delay: 2, duration: 1 }}
               >
-                <textPath href="#neonPath" startOffset="55%" textAnchor="middle" dy="-10">
+                <textPath href="#neonPath" startOffset="50%" textAnchor="middle" dy="-8">
                   negotiated
                 </textPath>
               </motion.text>
@@ -217,17 +217,19 @@ export default function Home() {
                   <stop offset="100%" stopColor="#3B82F6" stopOpacity="1" />
                 </linearGradient>
               </defs>
-            </svg>
 
-            {/* Glassmorphic Savings Badge */}
-            <motion.div
-              className="absolute bottom-4 right-8 md:-right-4 px-4 py-2 rounded-xl bg-green-500/10 border border-green-500/30 backdrop-blur-md shadow-[0_0_20px_rgba(34,197,94,0.2)]"
-              initial={{ opacity: 0, scale: 0.8, y: 10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ delay: 2.5, type: "spring", stiffness: 200, damping: 15 }}
-            >
-              <span className="text-sm font-black text-green-400 tracking-wider">13% SAVED</span>
-            </motion.div>
+              {/* SVG-based Savings Badge neatly stacked below Final price */}
+              <motion.g
+                initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ delay: 2.5, type: "spring", stiffness: 200, damping: 15 }}
+              >
+                <rect x="270" y="160" width="85" height="24" rx="12" fill="rgba(34,197,94,0.1)" stroke="rgba(34,197,94,0.3)" />
+                <text x="312.5" y="176" fill="#4ADE80" fontSize="10" fontWeight="900" textAnchor="middle" letterSpacing="1">
+                  13% SAVED
+                </text>
+              </motion.g>
+            </svg>
 
             {/* Decorative elements behind the graph */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-32 bg-blue-500/10 rounded-full blur-[50px] -z-10 animate-orb-shift" />
