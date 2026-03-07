@@ -52,7 +52,7 @@ export default function DashboardPage() {
                     transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
                     className="w-16 h-16"
                 >
-                    <img src="/images/logo.png" alt="Loading" className="object-contain w-full h-full drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
+                    <img src="/images/custom-logo.png" alt="Loading" className="object-contain w-full h-full drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
                 </motion.div>
             </div>
         );

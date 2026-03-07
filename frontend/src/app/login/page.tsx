@@ -46,7 +46,7 @@ export default function LoginPage() {
                     }}
                     className="w-32 h-32 md:w-48 md:h-48"
                 >
-                    <img src="/images/logo.png" alt="Loading" className="object-contain w-full h-full drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
+                    <img src="/images/custom-logo.png" alt="Loading" className="object-contain w-full h-full drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
                 </motion.div>
             </div>
         );

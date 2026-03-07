@@ -131,7 +131,7 @@ export const OfferModal: React.FC<OfferModalProps> = ({ productId, publicPrice, 
                             transition={{ repeat: Infinity, duration: 1.5 }}
                             className="relative flex h-24 w-24 items-center justify-center rounded-full border border-blue-500/30 bg-blue-500/10 shadow-[0_0_30px_rgba(59,130,246,0.3)]"
                         >
-                            <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
+                            <img src="/images/custom-logo.png" alt="Thinking..." className="h-8 w-8 animate-spin object-contain drop-shadow-[0_0_10px_rgba(59,130,246,0.3)]" />
                         </motion.div>
                         <p className="font-semibold text-blue-400">Seller AI is thinking...</p>
                     </div>

@@ -13,7 +13,7 @@ export default function SellPage() {
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [category, setCategory] = useState('FERTILIZERS');
+    const [category, setCategory] = useState('OTHER');
     const [imageFiles, setImageFiles] = useState<File[]>([]);
     const [publicPrice, setPublicPrice] = useState('');
     const [autoAccept, setAutoAccept] = useState('');
@@ -148,9 +148,11 @@ export default function SellPage() {
                                 onChange={(e) => setCategory(e.target.value)}
                                 className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-white focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-colors"
                             >
-                                <option value="FERTILIZERS">Fertilizers</option>
-                                <option value="SEEDS">Seeds</option>
-                                <option value="ORGANIC SUBSTANCES">Organic Substances</option>
+                                <option value="ELECTRONICS">Electronics & Tech</option>
+                                <option value="CLOTHING">Clothing & Apparal</option>
+                                <option value="HOME">Home & Garden</option>
+                                <option value="TOYS">Toys, Hobbies & Collectibles</option>
+                                <option value="OTHER">Other</option>
                             </select>
                         </div>
                         <div>
