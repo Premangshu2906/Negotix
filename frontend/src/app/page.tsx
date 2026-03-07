@@ -137,7 +137,7 @@ export default function Home() {
               {/* Neon Line Graph tracking downwards */}
               <motion.path
                 id="neonPath"
-                d="M 40 70 C 100 50, 140 160, 240 160 S 330 170, 360 170"
+                d="M 20 60 C 80 60, 100 160, 240 160 L 360 160"
                 fill="none"
                 stroke="url(#neonGradient)"
                 strokeWidth="4"
@@ -158,7 +158,7 @@ export default function Home() {
                 animate={{ opacity: 0.9 }}
                 transition={{ delay: 2, duration: 1 }}
               >
-                <textPath href="#neonPath" startOffset="48%" textAnchor="middle" dy="-8">
+                <textPath href="#neonPath" startOffset="38%" textAnchor="middle" dy="-8">
                   negotiated
                 </textPath>
               </motion.text>
@@ -181,7 +181,7 @@ export default function Home() {
               {/* Glowing endpoint dot */}
               <motion.circle
                 cx="360"
-                cy="170"
+                cy="160"
                 r="6"
                 fill="#3B82F6"
                 className="drop-shadow-[0_0_15px_rgba(59,130,246,1)]"
@@ -195,14 +195,14 @@ export default function Home() {
                 }}
               />
 
-              {/* SVG-based Savings Badge tracking the end dot */}
+              {/* SVG-based Savings Badge neatly stacked ON the line before the end dot */}
               <motion.g
                 initial={{ opacity: 0, scale: 0.8, x: -10 }}
                 animate={{ opacity: 1, scale: 1, x: 0 }}
                 transition={{ delay: 2.5, type: "spring", stiffness: 200, damping: 15 }}
               >
-                <rect x="255" y="158" width="95" height="24" rx="12" fill="rgba(6,30,15,0.9)" stroke="rgba(34,197,94,0.5)" strokeWidth="1.5" />
-                <text x="302.5" y="174" fill="#4ADE80" fontSize="11" fontWeight="900" textAnchor="middle" letterSpacing="1">
+                <rect x="250" y="148" width="100" height="24" rx="12" fill="rgba(6,30,15,0.95)" stroke="rgba(34,197,94,0.6)" strokeWidth="1.5" />
+                <text x="300" y="164" fill="#4ADE80" fontSize="11" fontWeight="900" textAnchor="middle" letterSpacing="1">
                   13% SAVED
                 </text>
               </motion.g>
