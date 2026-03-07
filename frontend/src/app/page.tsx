@@ -137,7 +137,7 @@ export default function Home() {
               {/* Neon Line Graph tracking downwards */}
               <motion.path
                 id="neonPath"
-                d="M 20 60 Q 80 40, 140 100 T 260 140 T 360 170"
+                d="M 40 70 C 100 50, 140 160, 240 160 S 330 170, 360 170"
                 fill="none"
                 stroke="url(#neonGradient)"
                 strokeWidth="4"
@@ -150,23 +150,23 @@ export default function Home() {
               {/* Curved Text tracking the line */}
               <motion.text
                 fill="#60A5FA"
-                fontSize="10"
+                fontSize="11"
                 fontWeight="bold"
-                letterSpacing="2"
+                letterSpacing="4"
                 className="drop-shadow-[0_0_8px_rgba(59,130,246,0.8)] uppercase"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 0.9 }}
                 transition={{ delay: 2, duration: 1 }}
               >
-                <textPath href="#neonPath" startOffset="50%" textAnchor="middle" dy="-8">
+                <textPath href="#neonPath" startOffset="48%" textAnchor="middle" dy="-8">
                   negotiated
                 </textPath>
               </motion.text>
 
               {/* Start Label: Retail Price */}
               <motion.text
-                x="20"
-                y="45"
+                x="40"
+                y="55"
                 fill="#9CA3AF"
                 fontSize="12"
                 fontWeight="bold"
@@ -195,21 +195,17 @@ export default function Home() {
                 }}
               />
 
-              {/* End Label: Negotix Price */}
-              <motion.text
-                x="350"
-                y="145"
-                fill="#ffffff"
-                fontSize="14"
-                fontWeight="black"
-                textAnchor="end"
-                className="drop-shadow-[0_0_10px_rgba(59,130,246,0.8)]"
-                initial={{ opacity: 0, y: 155 }}
-                animate={{ opacity: 1, y: 145 }}
-                transition={{ delay: 2, duration: 0.5 }}
+              {/* SVG-based Savings Badge tracking the end dot */}
+              <motion.g
+                initial={{ opacity: 0, scale: 0.8, x: -10 }}
+                animate={{ opacity: 1, scale: 1, x: 0 }}
+                transition={{ delay: 2.5, type: "spring", stiffness: 200, damping: 15 }}
               >
-                Final: ₹260
-              </motion.text>
+                <rect x="255" y="158" width="95" height="24" rx="12" fill="rgba(6,30,15,0.9)" stroke="rgba(34,197,94,0.5)" strokeWidth="1.5" />
+                <text x="302.5" y="174" fill="#4ADE80" fontSize="11" fontWeight="900" textAnchor="middle" letterSpacing="1">
+                  13% SAVED
+                </text>
+              </motion.g>
 
               <defs>
                 <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -217,18 +213,6 @@ export default function Home() {
                   <stop offset="100%" stopColor="#3B82F6" stopOpacity="1" />
                 </linearGradient>
               </defs>
-
-              {/* SVG-based Savings Badge neatly stacked below Final price */}
-              <motion.g
-                initial={{ opacity: 0, scale: 0.8, y: 10 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ delay: 2.5, type: "spring", stiffness: 200, damping: 15 }}
-              >
-                <rect x="270" y="160" width="85" height="24" rx="12" fill="rgba(34,197,94,0.1)" stroke="rgba(34,197,94,0.3)" />
-                <text x="312.5" y="176" fill="#4ADE80" fontSize="10" fontWeight="900" textAnchor="middle" letterSpacing="1">
-                  13% SAVED
-                </text>
-              </motion.g>
             </svg>
 
             {/* Decorative elements behind the graph */}
