@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import api from '@/lib/axios';
 import Link from 'next/link';
 
@@ -9,6 +9,20 @@ export default function Home() {
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [category, setCategory] = useState('ALL');
+  const [wordIndex, setWordIndex] = useState(0);
+
+  const words = [
+    { text: 'NEGOTIATE.', classes: 'text-white' },
+    { text: 'BUY.', classes: 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500' },
+    { text: 'SAVE.', classes: 'text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500' }
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setWordIndex((prev) => (prev + 1) % words.length);
+    }, 4000); // 4 seconds per word cycle
+    return () => clearInterval(interval);
+  }, []);
 
   const getPrimaryImage = (imagesStr: any) => {
     let imgPath = imagesStr;
@@ -63,33 +77,33 @@ export default function Home() {
 
           {/* LEFT SIDE: Text and Categories */}
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left pt-8">
-            <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-8">
-              <motion.span
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0, duration: 0.5 }}
-                className="text-white inline-block mr-3 mb-2 lg:mb-0"
-              >
-                NEGOTIATE.
-              </motion.span>
-              <br className="hidden lg:block" />
-              <motion.span
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-                className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 inline-block mr-3 mb-2 lg:mb-0"
-              >
-                BUY.
-              </motion.span>
-              <motion.span
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.0, duration: 0.5 }}
-                className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 inline-block"
-              >
-                SAVE.
-              </motion.span>
-            </h1>
+            <div className="h-24 md:h-32 mb-8 flex items-center lg:items-start justify-center lg:justify-start w-full">
+              <AnimatePresence mode="wait">
+                <motion.h1
+                  key={wordIndex}
+                  className={`text-5xl md:text-7xl font-black tracking-tight flex ${words[wordIndex].classes}`}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  variants={{
+                    visible: { transition: { staggerChildren: 0.25 } },
+                    exit: { opacity: 0, y: -20, transition: { duration: 0.3 } }
+                  }}
+                >
+                  {words[wordIndex].text.split('').map((char, i) => (
+                    <motion.span
+                      key={`${wordIndex}-${i}`}
+                      variants={{
+                        hidden: { opacity: 0, y: 20 },
+                        visible: { opacity: 1, y: 0, transition: { duration: 0.3 } }
+                      }}
+                    >
+                      {char}
+                    </motion.span>
+                  ))}
+                </motion.h1>
+              </AnimatePresence>
+            </div>
 
             <div className="flex flex-wrap lg:flex-nowrap justify-center lg:justify-start gap-4 w-[110%] md:w-full pb-6 lg:pb-2">
               {['ALL', 'ELECTRONICS', 'TOYS', 'DECOR', 'OTHERS'].map(cat => (
