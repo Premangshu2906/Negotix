@@ -146,6 +146,21 @@ export default function Home() {
                 transition={{ duration: 2, ease: "easeInOut" }}
               />
 
+              {/* Start Label: Retail Price */}
+              <motion.text
+                x="20"
+                y="45"
+                fill="#9CA3AF"
+                fontSize="12"
+                fontWeight="bold"
+                className="opacity-60 line-through"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.6 }}
+                transition={{ delay: 0.5, duration: 1 }}
+              >
+                Retail: $299
+              </motion.text>
+
               {/* Glowing endpoint dot */}
               <motion.circle
                 cx="360"
@@ -163,6 +178,22 @@ export default function Home() {
                 }}
               />
 
+              {/* End Label: Negotix Price */}
+              <motion.text
+                x="350"
+                y="145"
+                fill="#ffffff"
+                fontSize="14"
+                fontWeight="black"
+                textAnchor="end"
+                className="drop-shadow-[0_0_10px_rgba(59,130,246,0.8)]"
+                initial={{ opacity: 0, y: 155 }}
+                animate={{ opacity: 1, y: 145 }}
+                transition={{ delay: 2, duration: 0.5 }}
+              >
+                Negotix: $185
+              </motion.text>
+
               <defs>
                 <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                   <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.1" />
@@ -170,6 +201,16 @@ export default function Home() {
                 </linearGradient>
               </defs>
             </svg>
+
+            {/* Glassmorphic Savings Badge */}
+            <motion.div
+              className="absolute bottom-4 right-8 md:-right-4 px-4 py-2 rounded-xl bg-green-500/10 border border-green-500/30 backdrop-blur-md shadow-[0_0_20px_rgba(34,197,94,0.2)]"
+              initial={{ opacity: 0, scale: 0.8, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ delay: 2.5, type: "spring", stiffness: 200, damping: 15 }}
+            >
+              <span className="text-sm font-black text-green-400 tracking-wider">38% SAVED</span>
+            </motion.div>
 
             {/* Decorative elements behind the graph */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-32 bg-blue-500/10 rounded-full blur-[50px] -z-10 animate-orb-shift" />
