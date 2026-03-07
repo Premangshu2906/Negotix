@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import api from '@/lib/axios';
 import Link from 'next/link';
+import ParticleBackground from '@/components/ParticleBackground';
 
 export default function Home() {
   const [products, setProducts] = useState<any[]>([]);
@@ -71,6 +72,7 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen w-full bg-black overflow-hidden bg-dot-matrix">
+      <ParticleBackground />
       {/* Vibrant Background Orbs */}
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-600/30 blur-[120px] pointer-events-none animate-orb-shift" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-purple-600/20 blur-[150px] pointer-events-none animate-orb-shift" style={{ animationDelay: '5s' }} />
