@@ -129,91 +129,63 @@ export default function Home() {
 
           {/* RIGHT SIDE: Animated Data Visualization */}
           <div className="relative w-full max-w-md mx-auto lg:ml-auto h-64 flex items-center justify-center">
-            <svg
-              viewBox="0 0 400 200"
-              className="w-full h-full drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]"
-              preserveAspectRatio="none"
-            >
-              {/* Neon Line Graph tracking downwards */}
-              <motion.path
-                id="neonPath"
-                d="M 20 60 C 80 60, 100 160, 240 160 L 360 160"
-                fill="none"
-                stroke="url(#neonGradient)"
-                strokeWidth="4"
-                strokeLinecap="round"
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ pathLength: 1, opacity: 1 }}
-                transition={{ duration: 2, ease: "easeInOut" }}
-              />
+            {/* Premium Glassmorphic Dashboard Card */}
+            <div className="w-full bg-gradient-to-br from-gray-900/80 to-black/90 border border-white/10 rounded-2xl p-6 backdrop-blur-xl shadow-2xl relative overflow-hidden group">
 
-              {/* Curved Text tracking the line */}
-              <motion.text
-                fill="#60A5FA"
-                fontSize="11"
-                fontWeight="bold"
-                letterSpacing="4"
-                className="drop-shadow-[0_0_8px_rgba(59,130,246,0.8)] uppercase"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.9 }}
-                transition={{ delay: 2, duration: 1 }}
-              >
-                <textPath href="#neonPath" startOffset="38%" textAnchor="middle" dy="-8">
-                  negotiated
-                </textPath>
-              </motion.text>
+              {/* Subtle inner top glow */}
+              <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
 
-              {/* Start Label: Retail Price */}
-              <motion.text
-                x="40"
-                y="55"
-                fill="#9CA3AF"
-                fontSize="12"
-                fontWeight="bold"
-                className="opacity-60 line-through"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.6 }}
-                transition={{ delay: 0.5, duration: 1 }}
-              >
-                Retail: ₹300
-              </motion.text>
+              <div className="flex justify-between items-end mb-8 relative z-10">
+                {/* Left Column: Retail */}
+                <div className="flex flex-col text-left">
+                  <span className="text-gray-500 text-xs md:text-sm font-bold tracking-wider mb-2">Retail Price</span>
+                  <span className="text-gray-400 text-xl font-black line-through opacity-70">₹3,000</span>
+                </div>
 
-              {/* Glowing endpoint dot */}
-              <motion.circle
-                cx="360"
-                cy="160"
-                r="6"
-                fill="#3B82F6"
-                className="drop-shadow-[0_0_15px_rgba(59,130,246,1)]"
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: [1, 1.5, 1], opacity: [0.8, 1, 0.8] }}
-                transition={{
-                  delay: 2,
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              />
+                {/* Vertical Divider */}
+                <div className="w-px h-12 bg-white/10 self-center mx-4" />
 
-              {/* SVG-based Savings Badge neatly stacked ON the line before the end dot */}
-              <motion.g
-                initial={{ opacity: 0, scale: 0.8, x: -10 }}
-                animate={{ opacity: 1, scale: 1, x: 0 }}
-                transition={{ delay: 2.5, type: "spring", stiffness: 200, damping: 15 }}
-              >
-                <rect x="250" y="148" width="100" height="24" rx="12" fill="rgba(6,30,15,0.95)" stroke="rgba(34,197,94,0.6)" strokeWidth="1.5" />
-                <text x="300" y="164" fill="#4ADE80" fontSize="11" fontWeight="900" textAnchor="middle" letterSpacing="1">
-                  13% SAVED
-                </text>
-              </motion.g>
+                {/* Right Column: Negotix */}
+                <div className="flex flex-col text-right">
+                  <span className="text-white text-xs md:text-sm font-bold tracking-wider mb-2">Negotix Price</span>
+                  <motion.span
+                    initial={{ scale: 0.9, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: 0.5, duration: 0.5, type: "spring" }}
+                    className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200 drop-shadow-[0_0_15px_rgba(59,130,246,0.6)]"
+                  >
+                    ₹2,610
+                  </motion.span>
+                </div>
+              </div>
 
-              <defs>
-                <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.1" />
-                  <stop offset="100%" stopColor="#3B82F6" stopOpacity="1" />
-                </linearGradient>
-              </defs>
-            </svg>
+              {/* Progress Bar Container */}
+              <div className="relative z-10 mt-6">
+                <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: "87%" }}
+                    transition={{ delay: 1, duration: 1.5, ease: "easeOut" }}
+                    className="h-full bg-gradient-to-r from-green-500/40 via-green-400 to-green-300 rounded-full drop-shadow-[0_0_8px_rgba(74,222,128,0.8)]"
+                  />
+                </div>
+
+                {/* Savings Text */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 2, duration: 0.5 }}
+                  className="mt-3 text-right"
+                >
+                  <span className="text-[10px] md:text-xs font-black tracking-widest text-green-400 drop-shadow-[0_0_5px_rgba(74,222,128,0.5)]">
+                    13% SAVED VIA AI
+                  </span>
+                </motion.div>
+              </div>
+
+              {/* Subtle background card glow */}
+              <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-blue-500/10 rounded-full blur-[40px] pointer-events-none group-hover:bg-blue-500/20 transition-all duration-700" />
+            </div>
 
             {/* Decorative elements behind the graph */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-32 bg-blue-500/10 rounded-full blur-[50px] -z-10 animate-orb-shift" />
