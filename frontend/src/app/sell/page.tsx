@@ -13,7 +13,7 @@ export default function SellPage() {
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [category, setCategory] = useState('OTHER');
+    const [category, setCategory] = useState('FERTILIZERS');
     const [imageFiles, setImageFiles] = useState<File[]>([]);
     const [publicPrice, setPublicPrice] = useState('');
     const [autoAccept, setAutoAccept] = useState('');
@@ -55,6 +55,11 @@ export default function SellPage() {
             let uploadedImageUrls = 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070';
 
             if (imageFiles.length > 0) {
+                if (imageFiles.length > 5) {
+                    setError('You can only upload a maximum of 5 images.');
+                    setIsLoading(false);
+                    return;
+                }
                 const formData = new FormData();
                 imageFiles.forEach(file => formData.append('images', file));
 
@@ -143,11 +148,9 @@ export default function SellPage() {
                                 onChange={(e) => setCategory(e.target.value)}
                                 className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-white focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-colors"
                             >
-                                <option value="ELECTRONICS">Electronics & Tech</option>
-                                <option value="CLOTHING">Clothing & Apparal</option>
-                                <option value="HOME">Home & Garden</option>
-                                <option value="TOYS">Toys, Hobbies & Collectibles</option>
-                                <option value="OTHER">Other</option>
+                                <option value="FERTILIZERS">Fertilizers</option>
+                                <option value="SEEDS">Seeds</option>
+                                <option value="ORGANIC SUBSTANCES">Organic Substances</option>
                             </select>
                         </div>
                         <div>
@@ -158,7 +161,18 @@ export default function SellPage() {
                                 accept="image/*"
                                 onChange={(e) => {
                                     if (e.target.files) {
-                                        setImageFiles(Array.from(e.target.files));
+                                        const files = Array.from(e.target.files);
+                                        if (files.length > 5) {
+                                            setError('You can only upload a maximum of 5 images.');
+                                            return;
+                                        }
+                                        const maxSize = 50 * 1024 * 1024; // 50MB
+                                        if (files.some(file => file.size > maxSize)) {
+                                            setError('Each image must be smaller than 50MB.');
+                                            return;
+                                        }
+                                        setError('');
+                                        setImageFiles(files);
                                     }
                                 }}
                                 className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-white file:mr-4 file:rounded-xl file:border-0 file:bg-blue-600 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-blue-500 transition-colors cursor-pointer"
