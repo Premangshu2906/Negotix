@@ -66,7 +66,7 @@ router.post('/', authenticate, async (req: AuthRequest, res: Response): Promise<
                 sellerId: req.user.userId,
                 title,
                 description,
-                category: category || 'OTHER',
+                category: category || 'FERTILIZERS',
                 images,
                 publicPrice,
                 autoAcceptFloorPrice,
