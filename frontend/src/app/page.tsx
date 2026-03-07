@@ -136,6 +136,7 @@ export default function Home() {
             >
               {/* Neon Line Graph tracking downwards */}
               <motion.path
+                id="neonPath"
                 d="M 20 60 Q 80 40, 140 100 T 260 140 T 360 170"
                 fill="none"
                 stroke="url(#neonGradient)"
@@ -145,6 +146,22 @@ export default function Home() {
                 animate={{ pathLength: 1, opacity: 1 }}
                 transition={{ duration: 2, ease: "easeInOut" }}
               />
+
+              {/* Curved Text tracking the line */}
+              <motion.text
+                fill="#60A5FA"
+                fontSize="10"
+                fontWeight="bold"
+                letterSpacing="2"
+                className="drop-shadow-[0_0_8px_rgba(59,130,246,0.8)] uppercase"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.9 }}
+                transition={{ delay: 2, duration: 1 }}
+              >
+                <textPath href="#neonPath" startOffset="55%" textAnchor="middle" dy="-10">
+                  negotiated
+                </textPath>
+              </motion.text>
 
               {/* Start Label: Retail Price */}
               <motion.text
@@ -158,7 +175,7 @@ export default function Home() {
                 animate={{ opacity: 0.6 }}
                 transition={{ delay: 0.5, duration: 1 }}
               >
-                Retail: $299
+                Retail: ₹300
               </motion.text>
 
               {/* Glowing endpoint dot */}
@@ -191,7 +208,7 @@ export default function Home() {
                 animate={{ opacity: 1, y: 145 }}
                 transition={{ delay: 2, duration: 0.5 }}
               >
-                Negotix: $185
+                Final: ₹260
               </motion.text>
 
               <defs>
@@ -209,7 +226,7 @@ export default function Home() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ delay: 2.5, type: "spring", stiffness: 200, damping: 15 }}
             >
-              <span className="text-sm font-black text-green-400 tracking-wider">38% SAVED</span>
+              <span className="text-sm font-black text-green-400 tracking-wider">13% SAVED</span>
             </motion.div>
 
             {/* Decorative elements behind the graph */}
