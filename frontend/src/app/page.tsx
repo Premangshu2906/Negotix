@@ -18,11 +18,17 @@ export default function Home() {
   ];
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    // 200ms stagger per char + 300ms char animation + 500ms pause = variable duration
+    const currentWordLen = words[wordIndex].text.length;
+    const typeTime = (currentWordLen * 200) + 300;
+    const totalTime = typeTime + 500; // 0.5 sec pause at the end
+
+    const timeout = setTimeout(() => {
       setWordIndex((prev) => (prev + 1) % words.length);
-    }, 4000); // 4 seconds per word cycle
-    return () => clearInterval(interval);
-  }, []);
+    }, totalTime);
+
+    return () => clearTimeout(timeout);
+  }, [wordIndex]);
 
   const getPrimaryImage = (imagesStr: any) => {
     let imgPath = imagesStr;
@@ -86,7 +92,7 @@ export default function Home() {
                   animate="visible"
                   exit="exit"
                   variants={{
-                    visible: { transition: { staggerChildren: 0.25 } },
+                    visible: { transition: { staggerChildren: 0.2 } },
                     exit: { opacity: 0, y: -20, transition: { duration: 0.3 } }
                   }}
                 >
