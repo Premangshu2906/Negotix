@@ -50,35 +50,84 @@ export default function Home() {
   }, [category]);
 
   return (
-    <div className="relative min-h-screen w-full bg-black overflow-hidden">
+    <div className="relative min-h-screen w-full bg-black overflow-hidden bg-dot-matrix">
       {/* Vibrant Background Orbs */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-600/30 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-purple-600/20 blur-[150px] pointer-events-none" />
-      <div className="absolute top-[20%] right-[10%] w-[30%] h-[30%] rounded-full bg-green-500/10 blur-[100px] pointer-events-none" />
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-600/30 blur-[120px] pointer-events-none animate-orb-shift" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-purple-600/20 blur-[150px] pointer-events-none animate-orb-shift" style={{ animationDelay: '5s' }} />
+      <div className="absolute top-[20%] right-[10%] w-[30%] h-[30%] rounded-full bg-green-500/10 blur-[100px] pointer-events-none animate-orb-shift" style={{ animationDelay: '10s' }} />
 
       <div className="relative mx-auto max-w-7xl px-8 py-12 z-10">
-        <div className="mb-10 flex flex-col items-center justify-center gap-6">
-          <div className="text-center w-full">
-            <h1 className="text-3xl md:text-5xl font-black tracking-tight mb-2 whitespace-nowrap">
+
+        {/* HERO SECTION GRID */}
+        <div className="mb-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+          {/* LEFT SIDE: Text and Categories */}
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left pt-8">
+            <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-8">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-gray-300">NEGOTIATE. </span>
+              <br className="hidden lg:block" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">BUY. SAVE.</span>
             </h1>
+
+            <div className="flex flex-wrap lg:flex-nowrap justify-center lg:justify-start gap-4 w-[110%] md:w-full pb-6 lg:pb-2">
+              {['ALL', 'ELECTRONICS', 'TOYS', 'DECOR', 'OTHERS'].map(cat => (
+                <button
+                  key={cat}
+                  onClick={() => setCategory(cat)}
+                  style={{ borderRadius: '50%' }}
+                  className={`px-5 py-2.5 text-xs md:text-sm font-bold tracking-wider transition-all duration-300 border-2 ${category === cat
+                    ? 'border-blue-500 bg-blue-600/20 text-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.5)] scale-105'
+                    : 'border-white/10 bg-black/50 text-gray-400 hover:border-blue-400/50 hover:text-white hover:shadow-[0_0_15px_rgba(59,130,246,0.2)] backdrop-blur-sm'
+                    }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
           </div>
 
-          <div className="flex flex-nowrap justify-start md:justify-center gap-3 overflow-x-auto w-full pb-2 scrollbar-hide">
-            {['ALL', 'ELECTRONICS', 'TOYS', 'DECOR', 'OTHERS'].map(cat => (
-              <button
-                key={cat}
-                onClick={() => setCategory(cat)}
-                style={{ borderRadius: '50%' }}
-                className={`px-6 py-2 text-sm md:text-base font-bold tracking-wider transition-all border-2 ${category === cat
-                  ? 'border-blue-500 bg-blue-600/20 text-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.3)]'
-                  : 'border-gray-500/50 bg-black/50 text-gray-300 hover:border-gray-300 hover:text-white backdrop-blur-sm'
-                  }`}
-              >
-                {cat}
-              </button>
-            ))}
+          {/* RIGHT SIDE: Animated Mock Chat Window */}
+          <div className="relative w-full max-w-md mx-auto lg:ml-auto">
+            <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-white/0 p-6 backdrop-blur-xl shadow-2xl relative overflow-hidden transition-all duration-500 hover:border-white/20 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)]">
+              {/* Chat header */}
+              <div className="flex items-center space-x-3 mb-6 border-b border-white/5 pb-4">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-purple-600 flex items-center justify-center font-black text-white shadow-lg">AI</div>
+                <div>
+                  <h3 className="text-sm font-bold text-white">Negotix AI</h3>
+                  <p className="text-xs text-green-400 font-medium flex items-center"><span className="w-1.5 h-1.5 rounded-full bg-green-400 mr-1.5 animate-pulse"></span> Analyzing Deals</p>
+                </div>
+              </div>
+
+              {/* Chat bubbles */}
+              <div className="space-y-5">
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5, duration: 0.5 }}
+                  className="flex justify-end"
+                >
+                  <div className="bg-white/10 border border-white/10 text-white text-sm py-3 px-5 rounded-2xl rounded-tr-sm max-w-[85%] shadow-lg backdrop-blur-sm">
+                    Can you do <span className="font-bold text-blue-300">$150</span>?
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 2, duration: 0.5 }}
+                  className="flex justify-start"
+                >
+                  <div className="bg-gradient-to-r from-blue-900/40 to-purple-900/40 border border-blue-500/30 text-blue-50 text-sm py-3 px-5 rounded-2xl rounded-tl-sm max-w-[90%] shadow-lg relative overflow-hidden group">
+                    <div className="absolute inset-0 -translate-x-full w-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-light-sweep" style={{ animationDelay: '3s' }} />
+                    I can drop it to <span className="font-bold text-white">$165</span> with free shipping. Deal?
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+
+            {/* Decorative elements behind the chat */}
+            <div className="absolute -top-6 -right-6 w-32 h-32 bg-blue-500/20 rounded-full blur-[40px] -z-10 animate-orb-shift" />
+            <div className="absolute -bottom-10 -left-6 w-40 h-40 bg-purple-500/20 rounded-full blur-[50px] -z-10 animate-orb-shift" style={{ animationDelay: '2s' }} />
           </div>
         </div>
 
@@ -87,9 +136,24 @@ export default function Home() {
             <div className="h-10 w-10 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" />
           </div>
         ) : products.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20 text-center border border-white/10 rounded-3xl bg-gray-900/20 backdrop-blur-sm">
-            <p className="text-2xl font-bold text-gray-500 mb-2">No items available right now.</p>
-            <p className="text-gray-600">Check back soon for new your all in one place.</p>
+          <div className="flex flex-col items-center justify-center py-32 relative overflow-hidden rounded-3xl border border-white/5 bg-gradient-to-b from-gray-900/40 to-black/60 backdrop-blur-md shadow-2xl">
+            {/* Radar Rings */}
+            <div className="absolute flex items-center justify-center pointer-events-none">
+              <div className="absolute w-16 h-16 border border-blue-500/30 rounded-full animate-radar-pulse" />
+              <div className="absolute w-16 h-16 border border-blue-500/20 rounded-full animate-radar-pulse" style={{ animationDelay: '0.6s' }} />
+              <div className="absolute w-16 h-16 border border-blue-500/10 rounded-full animate-radar-pulse" style={{ animationDelay: '1.2s' }} />
+            </div>
+
+            <div className="relative z-10 w-16 h-16 mb-6 opacity-80 drop-shadow-[0_0_15px_rgba(59,130,246,0.6)]">
+              <img src="/images/logo.png" alt="Scanning" className="object-contain w-full h-full grayscale opacity-50" />
+            </div>
+
+            <p className="relative z-10 text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-600 mb-2 mt-4">
+              AI is scouting the best deals...
+            </p>
+            <p className="relative z-10 text-gray-600 text-sm font-medium">
+              The grid is currently empty. Check back shortly.
+            </p>
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">

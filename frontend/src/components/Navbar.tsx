@@ -138,9 +138,10 @@ export function Navbar() {
                             </Link>
                             <Link
                                 href="/register"
-                                className="rounded-full bg-blue-600 px-5 py-2 text-sm font-bold text-white transition hover:bg-blue-500 shadow-[0_0_15px_rgba(37,99,235,0.4)]"
+                                className="group relative overflow-hidden rounded-full bg-blue-600 px-5 py-2 text-sm font-bold text-white transition hover:bg-blue-500 shadow-[0_0_15px_rgba(37,99,235,0.4)]"
                             >
-                                Get Started
+                                <span className="relative z-10">Get Started</span>
+                                <div className="absolute inset-0 -translate-x-full w-1/2 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-light-sweep" />
                             </Link>
                         </>
                     )}
