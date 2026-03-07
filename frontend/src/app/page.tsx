@@ -138,8 +138,8 @@ export default function Home() {
               <div className="flex justify-between items-end mb-8 relative z-10">
                 {/* Left Column: Retail */}
                 <div className="flex flex-col text-left">
-                  <span className="text-gray-500 text-xs md:text-sm font-bold tracking-wider mb-2">Retail Price</span>
-                  <span className="text-gray-400 text-xl font-black line-through opacity-70">₹3,000</span>
+                  <span className="text-gray-500 text-xs md:text-sm font-bold tracking-wider mb-2">Listed Price</span>
+                  <span className="text-gray-400 text-xl font-black line-through opacity-70">₹1,000</span>
                 </div>
 
                 {/* Vertical Divider */}
@@ -154,7 +154,7 @@ export default function Home() {
                     transition={{ delay: 0.5, duration: 0.5, type: "spring" }}
                     className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200 drop-shadow-[0_0_15px_rgba(59,130,246,0.6)]"
                   >
-                    ₹2,610
+                    ₹955
                   </motion.span>
                 </div>
               </div>
@@ -164,7 +164,7 @@ export default function Home() {
                 <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
                   <motion.div
                     initial={{ width: 0 }}
-                    animate={{ width: "87%" }}
+                    animate={{ width: "95.5%" }}
                     transition={{ delay: 1, duration: 1.5, ease: "easeOut" }}
                     className="h-full bg-gradient-to-r from-green-500/40 via-green-400 to-green-300 rounded-full drop-shadow-[0_0_8px_rgba(74,222,128,0.8)]"
                   />
@@ -178,7 +178,7 @@ export default function Home() {
                   className="mt-3 text-right"
                 >
                   <span className="text-[10px] md:text-xs font-black tracking-widest text-green-400 drop-shadow-[0_0_5px_rgba(74,222,128,0.5)]">
-                    13% SAVED VIA AI
+                    4.5% SAVED VIA AI
                   </span>
                 </motion.div>
               </div>
