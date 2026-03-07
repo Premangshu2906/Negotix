@@ -25,11 +25,11 @@ const storage = multer.diskStorage({
 
 const upload = multer({
     storage,
-    limits: { fileSize: 50 * 1024 * 1024 }, // 50MB limit
+    limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
     fileFilter: (req, file, cb) => {
-        const filetypes = /jpeg|jpg|png|webp|gif|heic/;
+        const filetypes = /jpeg|jpg|png|webp|gif/;
         const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-        const mimetype = filetypes.test(file.mimetype) || /image\//.test(file.mimetype);
+        const mimetype = filetypes.test(file.mimetype);
 
         if (mimetype && extname) {
             return cb(null, true);
@@ -42,12 +42,6 @@ const upload = multer({
 router.post('/', authenticate, (req: AuthRequest, res: Response): any => {
     upload.array('images', 5)(req, res, (err) => {
         if (err instanceof multer.MulterError) {
-            if (err.code === 'LIMIT_UNEXPECTED_FILE') {
-                return res.status(400).json({ error: 'Maximum 5 images allowed.' });
-            }
-            if (err.code === 'LIMIT_FILE_SIZE') {
-                return res.status(400).json({ error: 'File size too large (max 50MB).' });
-            }
             // A Multer error occurred when uploading.
             return res.status(500).json({ error: `Multer error: ${err.message}` });
         } else if (err) {

@@ -9,7 +9,6 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const db_1 = require("../db");
 const router = express_1.default.Router();
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecret_bargainhub_key';
-// OTP sending logic removed
 // Register User
 router.post('/register', async (req, res) => {
     try {
@@ -26,7 +25,6 @@ router.post('/register', async (req, res) => {
                 email,
                 passwordHash,
                 role: role || 'BUYER',
-                isVerified: true, // Auto-verify since we disabled OTP
             },
         });
         const token = jsonwebtoken_1.default.sign({ userId: user.id, role: user.role }, JWT_SECRET, { expiresIn: '7d' });
