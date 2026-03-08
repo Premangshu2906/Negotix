@@ -102,7 +102,7 @@ function CreativePricing({
                                 <h3 className="text-3xl font-black text-white tracking-wide">
                                     {tier.name}
                                 </h3>
-                                <p className="text-zinc-400 mt-2 font-medium">
+                                <p className="text-zinc-400 mt-2 font-medium whitespace-pre-line">
                                     {tier.description}
                                 </p>
                             </div>
@@ -110,7 +110,7 @@ function CreativePricing({
                             {/* Price */}
                             <div className="mb-8 flex items-baseline border-b border-white/20 pb-8">
                                 <span className="text-6xl font-black text-white">
-                                    ${tier.price}
+                                    ₹{tier.price}
                                 </span>
                                 <span className="text-zinc-400 font-bold ml-1">
                                     {tier.interval || "/month"}
