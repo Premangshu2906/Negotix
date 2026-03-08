@@ -37,41 +37,41 @@ export default function PricingPage() {
 
     const creativeTiers: PricingTier[] = [
         {
-            name: 'Creator',
-            price: isAnnual ? 0 : 29,
-            description: 'Perfect for short video beginners',
-            features: ['Browse Marketplace', 'Make Basic Offers', 'Standard Support', '25 total negotiations/mo'],
+            name: 'FREE',
+            price: isAnnual ? 0 : 0,
+            description: '3 negotiations for each product\n25 total negotiations a month',
+            features: ['Browse Marketplace', 'Make Basic Offers', 'Standard Support'],
             color: 'yellow',
             icon: <Pencil className="w-6 h-6 text-[#fbbf24]" />,
             buttonText: loading === 'FREE' ? 'Processing...' : user?.subscriptionTier === 'FREE' ? 'Current Plan' : 'Get Started',
             onButtonClick: () => handleUpgrade('FREE'),
             disabled: user?.subscriptionTier === 'FREE' || loading !== null,
-            interval: isAnnual ? '/yr' : '/month'
+            interval: isAnnual ? '/yr' : '/mo'
         },
         {
-            name: 'Influencer',
-            price: isAnnual ? 2200 : 79,
-            description: 'For serious content creators',
-            features: ['3-minute Video Export', 'Voice Effects & Filters', 'Trending Sound Library', 'Auto Captions & Subtitles'],
+            name: 'PRO',
+            price: isAnnual ? 2200 : 199,
+            description: '5 negotiations for each product\n50 total negotiations a month',
+            features: ['Priority Bidding', 'Sell up to 10 items', '24/7 Premium Support', 'Advanced Analytics'],
             color: 'blue',
             icon: <Zap className="w-6 h-6 text-[#3b82f6]" />,
             buttonText: loading === 'PRO' ? 'Processing...' : user?.subscriptionTier === 'PRO' ? 'Current Plan' : 'Get Started',
             onButtonClick: () => handleUpgrade('PRO'),
             disabled: user?.subscriptionTier === 'PRO' || loading !== null,
             popular: true,
-            interval: isAnnual ? '/yr' : '/month'
+            interval: isAnnual ? '/yr' : '/mo'
         },
         {
-            name: 'Pro Studio',
-            price: isAnnual ? 4300 : 149,
-            description: 'For viral content masters',
-            features: ['Multi-clip Editing', 'Green Screen Effects', 'Viral Sound Detection', 'Engagement Analytics'],
+            name: 'PREMIUM',
+            price: isAnnual ? 4300 : 399,
+            description: '10 negotiations for each product\nUnlimited negotiations a month',
+            features: ['Zero Selling Fees', 'Unlimited Listings', 'Instant AI Acceptance Bypasses', 'Dedicated Account Manager'],
             color: 'white',
             icon: <Crown className="w-6 h-6" />,
             buttonText: loading === 'PREMIUM' ? 'Processing...' : user?.subscriptionTier === 'PREMIUM' ? 'Current Plan' : 'Get Started',
             onButtonClick: () => handleUpgrade('PREMIUM'),
             disabled: user?.subscriptionTier === 'PREMIUM' || loading !== null,
-            interval: isAnnual ? '/yr' : '/month'
+            interval: isAnnual ? '/yr' : '/mo'
         }
     ];
 
