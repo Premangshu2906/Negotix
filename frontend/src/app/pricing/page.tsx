@@ -39,8 +39,8 @@ export default function PricingPage() {
         {
             name: 'FREE',
             price: isAnnual ? 0 : 0,
-            description: '3 negotiations for each product\n25 total negotiations a month',
-            features: ['Browse Marketplace', 'Make Basic Offers', 'Standard Support'],
+            description: '1. 3 negotiations for each product\n2. 25 total negotiations a month',
+            features: [],
             color: 'yellow',
             icon: <Pencil className="w-6 h-6 text-[#fbbf24]" />,
             buttonText: loading === 'FREE' ? 'Processing...' : user?.subscriptionTier === 'FREE' ? 'Current Plan' : 'Get Started',
@@ -51,8 +51,8 @@ export default function PricingPage() {
         {
             name: 'PRO',
             price: isAnnual ? 2200 : 199,
-            description: '5 negotiations for each product\n50 total negotiations a month',
-            features: ['Priority Bidding', 'Sell up to 10 items', '24/7 Premium Support', 'Advanced Analytics'],
+            description: '1. 5 negotiations for each product\n2. 50 total negotiations a month',
+            features: [],
             color: 'blue',
             icon: <Zap className="w-6 h-6 text-[#3b82f6]" />,
             buttonText: loading === 'PRO' ? 'Processing...' : user?.subscriptionTier === 'PRO' ? 'Current Plan' : 'Get Started',
@@ -64,8 +64,8 @@ export default function PricingPage() {
         {
             name: 'PREMIUM',
             price: isAnnual ? 4300 : 399,
-            description: '10 negotiations for each product\nUnlimited negotiations a month',
-            features: ['Zero Selling Fees', 'Unlimited Listings', 'Instant AI Acceptance Bypasses', 'Dedicated Account Manager'],
+            description: '1. 10 negotiations for each product\n2. Unlimited negotiations a month',
+            features: [],
             color: 'white',
             icon: <Crown className="w-6 h-6" />,
             buttonText: loading === 'PREMIUM' ? 'Processing...' : user?.subscriptionTier === 'PREMIUM' ? 'Current Plan' : 'Get Started',

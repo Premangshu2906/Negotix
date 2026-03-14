@@ -202,25 +202,7 @@ export default function Home() {
               <div className="h-10 w-10 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" />
             </div>
           ) : products.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-32 relative overflow-hidden rounded-3xl border border-white/5 bg-gradient-to-b from-gray-900/40 to-black/60 backdrop-blur-md shadow-2xl">
-              {/* Radar Rings */}
-              <div className="absolute flex items-center justify-center pointer-events-none">
-                <div className="absolute w-16 h-16 border border-blue-500/30 rounded-full animate-radar-pulse" />
-                <div className="absolute w-16 h-16 border border-blue-500/20 rounded-full animate-radar-pulse" style={{ animationDelay: '0.6s' }} />
-                <div className="absolute w-16 h-16 border border-blue-500/10 rounded-full animate-radar-pulse" style={{ animationDelay: '1.2s' }} />
-              </div>
-
-              <div className="relative z-10 w-16 h-16 mb-6 opacity-80 drop-shadow-[0_0_15px_rgba(59,130,246,0.6)]">
-                <img src="/images/logo.png" alt="Scanning" className="object-contain w-full h-full grayscale opacity-50" />
-              </div>
-
-              <p className="relative z-10 text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-600 mb-2 mt-4">
-                AI is scouting the best deals...
-              </p>
-              <p className="relative z-10 text-gray-600 text-sm font-medium">
-                The grid is currently empty. Check back shortly.
-              </p>
-            </div>
+            null
           ) : (
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
               {products.map((product, idx) => (
