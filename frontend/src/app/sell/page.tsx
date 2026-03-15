@@ -69,7 +69,8 @@ export default function SellPage() {
 
                 // Save all uploaded URLs as a JSON string array
                 if (uploadRes.data.urls && uploadRes.data.urls.length > 0) {
-                    const fullUrls = uploadRes.data.urls.map((url: string) => `http://localhost:5000${url}`);
+                    const backendBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+                    const fullUrls = uploadRes.data.urls.map((url: string) => `${backendBase}${url}`);
                     uploadedImageUrls = JSON.stringify(fullUrls);
                 }
             }
