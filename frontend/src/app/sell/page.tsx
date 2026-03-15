@@ -18,6 +18,7 @@ export default function SellPage() {
     const [publicPrice, setPublicPrice] = useState('');
     const [autoAccept, setAutoAccept] = useState('');
     const [autoCounter, setAutoCounter] = useState('');
+    const [inventoryCount, setInventoryCount] = useState('1');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
@@ -84,7 +85,7 @@ export default function SellPage() {
                 publicPrice: price,
                 autoAcceptFloorPrice: acceptFloor,
                 autoCounterFloorPrice: counterFloor,
-                inventoryCount: 1
+                inventoryCount: parseInt(inventoryCount) || 1
             });
             router.push('/');
         } catch (err: any) {
@@ -245,6 +246,22 @@ export default function SellPage() {
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    {/* Inventory Count */}
+                    <div>
+                        <label className="mb-2 block text-sm font-medium text-gray-400">Items Available (Inventory)</label>
+                        <input
+                            type="number"
+                            required
+                            min={1}
+                            max={999}
+                            value={inventoryCount}
+                            onChange={(e) => setInventoryCount(e.target.value)}
+                            className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-white focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-colors"
+                            placeholder="1"
+                        />
+                        <p className="mt-1 text-xs text-gray-500">How many units of this item do you have to sell?</p>
                     </div>
 
                     <button
